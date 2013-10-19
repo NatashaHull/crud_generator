@@ -5,6 +5,7 @@ describe CRUDGenerator do
   context "Controller variables" do
     before(:each) do
       class ParentsController
+        extend CRUDGenerator
         include CRUDGenerator
         
         def root_url
@@ -47,6 +48,7 @@ describe CRUDGenerator do
     before(:each) do
       class ParentsController
         extend CRUDGenerator
+        include CRUDGenerator
       end
     end
 

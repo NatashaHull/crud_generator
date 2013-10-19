@@ -2,8 +2,7 @@ require 'active_support/inflector'
 
 module CRUDGenerator
   def generate_crud_actions(*args)
-    actions = args ||
-              [:index, :show, :new, :create, :edit, :update, :delete]
+    actions = [:index, :show, :new, :create, :edit, :update, :destroy]
 
     actions.each do |action|
       send("define_#{action}")
@@ -104,13 +103,3 @@ module CRUDGenerator
     url += "/#{instance_name.pluralize}"
   end
 end
-
-# module UseCrudForInstances
-#   def method_missing(method_name)
-#     crud = [:index, :new, :create, :show, :update, :destroy]
-#     if crud.include?(method_name)
-#       self.class.send(method_name)
-#     else
-      
-#   end
-# end
