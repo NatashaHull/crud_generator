@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 module CRUDGenerator
   def generate_crud_actions(*args)
     actions = args ||
