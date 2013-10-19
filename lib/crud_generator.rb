@@ -3,7 +3,14 @@ require 'active_support/inflector'
 module CRUDGenerator
   def generate_crud_actions(*args)
     actions = [:index, :show, :new, :create, :edit, :update, :destroy]
-    actions = args unless args.empty?
+
+    #Allows user input to set the methods one of two ways
+    if args.length == 1 && args[0].is_a?(Hash)
+      actions = args[0].values.flatten if args[0].keys.first == :only
+      actions -= args[0].values.flatten if args[0].keys.first == :except
+    elsif !args.empty?
+      actions = args
+    end
 
     actions.each do |action|
       send("define_#{action}")

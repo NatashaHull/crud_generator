@@ -81,7 +81,34 @@ describe CRUDGenerator do
       child2.methods.should_not include(:destroy)
     end
 
-    it "only creates included crud methods"
-    it "creates all crud methods except ones that are excluded"
+    it "only creates included crud methods" do
+      class EvenMoreChildrenController < ParentsController
+        generate_crud_actions :only => [:index, :show]
+      end
+      child3 = EvenMoreChildrenController.new
+
+      child3.methods.should include(:index)
+      child3.methods.should include(:show)
+      child3.methods.should_not include(:new)
+      child3.methods.should_not include(:create)
+      child3.methods.should_not include(:edit)
+      child3.methods.should_not include(:update)
+      child3.methods.should_not include(:destroy)
+    end
+
+    it "creates all crud methods except ones that are excluded" do
+      class LastChildrenController < ParentsController
+        generate_crud_actions :except => [:index, :show]
+      end
+      child4 = LastChildrenController.new
+
+      child4.methods.should_not include(:index)
+      child4.methods.should_not include(:show)
+      child4.methods.should include(:new)
+      child4.methods.should include(:create)
+      child4.methods.should include(:edit)
+      child4.methods.should include(:update)
+      child4.methods.should include(:destroy)
+    end
   end
 end
