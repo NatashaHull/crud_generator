@@ -3,6 +3,7 @@ require 'active_support/inflector'
 module CRUDGenerator
   def generate_crud_actions(*args)
     actions = [:index, :show, :new, :create, :edit, :update, :destroy]
+    actions = args unless args.empty?
 
     actions.each do |action|
       send("define_#{action}")

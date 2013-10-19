@@ -50,24 +50,37 @@ describe CRUDGenerator do
         include CRUDGenerator
       end
     end
-
-    let(:child_controller) { ChildrenController.new }
     
     it "creates all crud methods automatically" do
       class ChildrenController
         generate_crud_actions
       end
+      child1 = ChildrenController.new
 
-      child_controller.methods.should include(:index)
-      child_controller.methods.should include(:show)
-      child_controller.methods.should include(:new)
-      child_controller.methods.should include(:create)
-      child_controller.methods.should include(:edit)
-      child_controller.methods.should include(:update)
-      child_controller.methods.should include(:destroy)
+      child1.methods.should include(:index)
+      child1.methods.should include(:show)
+      child1.methods.should include(:new)
+      child1.methods.should include(:create)
+      child1.methods.should include(:edit)
+      child1.methods.should include(:update)
+      child1.methods.should include(:destroy)
     end
 
-    it "add all and only specified crud methods (when specified)"
+    it "add all and only specified crud methods (when specified)" do
+      class MoreChildrenController < ParentsController
+        generate_crud_actions :index, :show
+      end
+      child2 = MoreChildrenController.new
+
+      child2.methods.should include(:index)
+      child2.methods.should include(:show)
+      child2.methods.should_not include(:new)
+      child2.methods.should_not include(:create)
+      child2.methods.should_not include(:edit)
+      child2.methods.should_not include(:update)
+      child2.methods.should_not include(:destroy)
+    end
+
     it "only creates included crud methods"
     it "creates all crud methods except ones that are excluded"
   end
