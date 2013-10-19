@@ -46,7 +46,7 @@ describe CRUDGenerator do
   context "Controller actions" do
     before(:each) do
       class ParentsController
-        include CRUDGenerator
+        extend CRUDGenerator
       end
     end
 
@@ -57,13 +57,13 @@ describe CRUDGenerator do
         generate_crud_actions
       end
 
-      child_controller.methods.should include(index)
-      child_controller.methods.should include(show)
-      child_controller.methods.should include(new)
-      child_controller.methods.should include(create)
-      child_controller.methods.should include(edit)
-      child_controller.methods.should include(update)
-      child_controller.methods.should include(destroy)
+      child_controller.methods.should include(:index)
+      child_controller.methods.should include(:show)
+      child_controller.methods.should include(:new)
+      child_controller.methods.should include(:create)
+      child_controller.methods.should include(:edit)
+      child_controller.methods.should include(:update)
+      child_controller.methods.should include(:destroy)
     end
 
     it "add all and only specified crud methods (when specified)"
