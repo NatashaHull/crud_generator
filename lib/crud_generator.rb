@@ -91,7 +91,7 @@ module CRUDGenerator
   end
 
   def instance_name
-    self.class.to_s.underscore[0..-12].singularize
+    self.to_s.underscore[0..-12].singularize
   end
 
   def model_class

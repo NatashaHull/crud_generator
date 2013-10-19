@@ -6,9 +6,8 @@ describe CRUDGenerator do
     before(:each) do
       class ParentsController
         extend CRUDGenerator
-        include CRUDGenerator
         
-        def root_url
+        def self.root_url
           "localhost:3000"
         end
       end
@@ -18,8 +17,8 @@ describe CRUDGenerator do
     end
 
     it "has the right instance name" do
-      name1 = ParentsController.new.instance_name
-      name2 = ChildrenController.new.instance_name
+      name1 = ParentsController.instance_name
+      name2 = ChildrenController.instance_name
 
       name1.should == "parent"
       name2.should == "child"
@@ -28,16 +27,16 @@ describe CRUDGenerator do
     it "has the right model class" do
       Parent = Struct.new(:name)
       Child = Struct.new(:name)
-      model1 = ParentsController.new.model_class
-      model2 = ChildrenController.new.model_class
+      model1 = ParentsController.model_class
+      model2 = ChildrenController.model_class
 
       model1.should == (Parent)
       model2.should == (Child)
     end
 
     it "has the right index_url" do
-      index1 = ParentsController.new.index_url
-      index2 = ChildrenController.new.index_url
+      index1 = ParentsController.index_url
+      index2 = ChildrenController.index_url
 
       index1.should == "localhost:3000/parents"
       index2.should == "localhost:3000/children"
