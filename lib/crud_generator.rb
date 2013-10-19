@@ -92,7 +92,7 @@ module CRUDGenerator
   end
 
   def instance_name
-    self.class.to_s.delete("Controller").singularize
+    self.class.to_s.underscore[0..-12].singularize
   end
 
   def model_class
@@ -101,6 +101,6 @@ module CRUDGenerator
 
   def index_url
     url = root_url
-    url += "/#{model_class.pluralize}"
+    url += "/#{instance_name.pluralize}"
   end
 end
