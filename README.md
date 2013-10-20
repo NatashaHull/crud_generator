@@ -48,7 +48,7 @@ If you choose to specify which CRUD actions you want, none of the other methods 
 
 #Generated code
 
-All of the above explains how to use this gem, but does not show what the gem actually does. Suppose that you are creating a basic posts resource for you application and that you want to have `index` and `show` pages, in addition to giving your users the ability to `create`, `update` and `destroy` posts (using the related `new` and `edit` views). You can simply type in `generate_crud_actions` and the following controller actions will be created for you:
+All of the above explains how to use this gem, but does not show what the gem actually does. Suppose that you are creating a basic posts resource for you application and that you want to have `index` and `show` pages, in addition to giving your users the ability to `create`, `update` and `destroy` posts (using the related `new` and `edit` views). You can simply type in `generate_crud_actions` into your PostsController and the following controller actions will be created for you:
 
 The `index` action:
 ```
@@ -116,3 +116,7 @@ end
 ```
 
 Creating every CRUD action would work if you want all of the code above. However, if you would prefer to make the `create` action more specific, like giving it the ability to make the author of the post the current user, then you should probably specify that you want every CRUD action above except `create` and make your own `create` action as needed (if you need an example of how to do this, look at the previous section).
+
+#Note on Incorrect Usage
+
+The code is generated based on your controller name and the assumption that there is an associated model and set of routes. This means that you should never create any of these actions if there is no associated model or you do not have the routes that the generated action.
