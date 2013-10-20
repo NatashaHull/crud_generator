@@ -6,7 +6,7 @@ spec = Gem::Specification.new do |s|
   s.summary = "CRUD generator generates CRUD dynamically in controllers"
   s.files = Dir.glob("**/**/**")
   s.test_files  = Dir.glob("{spec,test}/**/*.rb")
-  s.auto_require = 'crud_generator'
+  s.autorequire = 'crud_generator'
   s.add_development_dependency 'rspec', '~> 2.5'
   s.add_development_dependency'active_support/inflector'
 
