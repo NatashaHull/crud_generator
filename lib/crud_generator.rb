@@ -19,6 +19,8 @@ module CRUDGenerator
 
   def define_index
     define_method(:index) do
+      instance_name = self.class.instance_name
+      model_class = self.class.model_class
       instance_variable_set(
         "@#{instance_name.pluralize}",
         model_class.all
@@ -28,6 +30,8 @@ module CRUDGenerator
 
   def define_show
     define_method(:show) do
+      instance_name = self.class.instance_name
+      model_class = self.class.model_class
       instance_variable_set(
         "@#{instance_name}",
         model_class.find(params[:id])
@@ -37,6 +41,8 @@ module CRUDGenerator
 
   def define_new
     define_method(:new) do
+      instance_name = self.class.instance_name
+      model_class = self.class.model_class
       instance_variable_set(
         "@#{instance_name}",
         model_class.new
@@ -46,6 +52,8 @@ module CRUDGenerator
 
   def define_edit
     define_method(:edit) do
+      instance_name = self.class.instance_name
+      model_class = self.class.model_class
       instance_variable_set(
         "@#{instance_name}",
         model_class.find(params[:id])
@@ -55,6 +63,8 @@ module CRUDGenerator
 
   def define_create
     define_method(:create) do
+      instance_name = self.class.instance_name
+      model_class = self.class.model_class
       instance_variable_set(
         "@#{instance_name}",
         model_class.new(params[instance_name.to_sym])
@@ -73,6 +83,8 @@ module CRUDGenerator
 
   def define_update
     define_method(:update) do
+      instance_name = self.class.instance_name
+      model_class = self.class.model_class
       instance_variable_set(
         "@#{instance_name}",
         model_class.find(params[:id])
@@ -91,6 +103,8 @@ module CRUDGenerator
 
   def define_destroy
     define_method(:destroy) do
+      index_url = self.class.index_url
+      model_class = self.class.model_class
       obj = model_class.find(params[:id])
 
       obj.destroy
